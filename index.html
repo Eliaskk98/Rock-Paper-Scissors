@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            let playerScore = 0;
+            let computerScore = 0;
+            
+            function computerPlay() {
+                let computerSelection = Math.floor(Math.random() * 3) + 1;
+                if (computerSelection == 1) {
+                    return "ROCK";
+                } else if (computerSelection == 2) {
+                    return "PAPER";
+                } else {
+                    return "SCISSORS";
+                }
+            }
+                
+            function singleRound(playerSelection, computerSelection)  {
+                playerSelection = playerSelection.toUpperCase();
+                if (!playerSelection) {
+                    return "Enter Rock, Paper or Scissors";
+                } else if (!(playerSelection == "ROCK" || playerSelection == "PAPER" || playerSelection == "SCISSORS")) {
+                    return "Invalid Input";
+                } else if (playerSelection === "ROCK" && computerSelection === "PAPER") {
+                    return "You lost!";
+                } else if (playerSelection === "ROCK" && computerSelection === "SCISSORS") {
+                    return "You won!";
+                } else if (playerSelection === "PAPER" && computerSelection === "ROCK") {
+                    return "You won!";
+                } else if (playerSelection === "PAPER" && computerSelection === "SCISSORS") {
+                    return "You lost";
+                } else if (playerSelection === "SCISSORS" && computerSelection === "ROCK") {
+                    return "You lost";
+                } else if (playerSelection === "SCISSORS" && computerSelection === "PAPER") {
+                    return "You won";
+                } else {
+                    return "It's a tie!";
+                }
+            }
+
+            function game() {
+                  for ( let n = 0; n < 5; n++) {
+                      let computerSelection = computerPlay();
+                      let results = singleRound(prompt("Test your luck!Pick ROCK, PAPER or SCISSORS"), computerSelection);
+                      if (results.includes("won")) {
+                          playerScore++;
+                      } else if (results.includes("lost")) {
+                          computerScore++;
+                      } else {
+                          playerScore = playerScore + 0;
+                          computerScore = computerScore +0;
+                      }   
+                      console.log(results)             
+                      console.log(`Player has ${playerScore} wins`);
+                      console.log(`Computer has ${computerScore} wins`);
+                    }
+            }
+
+            game();
+            if (playerScore > computerScore) {
+                console.log("Nice!You are the winner.");
+            } else if (playerScore < computerScore) {
+                console.log("Too bad!Computer won.");
+            } else {
+                console.log("It's a tie!");
+            }
+            
+        </script>
+    </body>
+</html>
